@@ -46,7 +46,7 @@ export default function Page() {
             setLatestWord(transcript.split(" ").pop() || "");
         }
 
-        if (latestWordIndex < 0) {
+        if (latestWordIndex < -1) {
             return; // No need to process if the latestWordIndex is not set
         }
 
@@ -57,26 +57,38 @@ export default function Page() {
 
         let end = latestWordIndex + 10;
         // @ts-ignore
-        if (end > words.length - 1) {
+        if (end > words.length) {
             // @ts-ignore
-            end = words.length - 1;
+            end = words.length;
         }
 
-        for (let i = start; i < end; i++) {
+        for (let i = latestWordIndex; i < end - 5; i++) {
             // @ts-ignore
             if (words[i].includes(latestWord.replace(/[^a-zA-Z0-9]/g, ""))) {
-                scrollToWord(i + 1); // Scroll to the word with the latestWord
+                scrollToWord(i); // Scroll to the word with the latestWord
+                setLatestWordIndex(i)
+                break; // Stop searching after the first match
+            }
+        }
+
+        for (let i = start; i < latestWordIndex + 1; i++) {
+            // @ts-ignore
+            if (words[i].includes(latestWord.replace(/[^a-zA-Z0-9]/g, ""))) {
+                scrollToWord(i); // Scroll to the word with the latestWord
+                setLatestWordIndex(i)
+                break; // Stop searching after the first match
+            }
+        }
+
+        for (let i = latestWordIndex; i < end; i++) {
+            // @ts-ignore
+            if (words[i].includes(latestWord.replace(/[^a-zA-Z0-9]/g, ""))) {
+                scrollToWord(i); // Scroll to the word with the latestWord
                 setLatestWordIndex(i)
                 break; // Stop searching after the first match
             }
         }
     }, [latestWord, latestWordIndex, scrollToWord, transcript, words]);
-
-    const resetTranscriptAndLatestWord = () => {
-        resetTranscript();
-        setLatestWord("");
-        setLatestWordIndex(-1);
-    }
 
     return (
         <ChakraProvider>
@@ -85,13 +97,13 @@ export default function Page() {
                     <div className={'w-full h-full lg:w-2/3 lg:h-2/3 bg-slate-300 rounded-2xl p-2 overflow-auto'}>
                         <div id={'scrollable'} className={'break-words'}>
                             {words?.map((word, index) => {
-                                return <span key={index} ref={refs[index]} className={(latestWordIndex + 1 == index) ? 'text-white text-xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
+                                return <span key={index} ref={refs[index]} className={((latestWordIndex + 1) == index) ? 'text-white text-xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
                             })}
                         </div>
                     </div>
                     <div className={'flex flex-row space-x-10 mt-5'}>
                         <Button onClick={listenContinuously}>Start</Button>
-                        <Button colorScheme={'red'} onClick={resetTranscriptAndLatestWord}>Reset</Button>
+                        <Button colorScheme={'red'} onClick={resetTranscript}>Reset</Button>
                         <p>{latestWord}</p>
                     </div>
                 </div>
