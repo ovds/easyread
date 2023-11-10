@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import {createRef, RefObject, useEffect, useState} from "react";
 import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 import {Button, ChakraProvider} from "@chakra-ui/react";
+import { IconButton } from '@chakra-ui/react'
+import {AddIcon, MinusIcon} from "@chakra-ui/icons";
 
 export default function Page() {
     const searchParams = useSearchParams()
@@ -107,14 +109,39 @@ export default function Page() {
         }
     }, [latestWord, latestWordIndex, scrollToWord, transcript, words]);
 
+    const [fontSize, setFontSize] = useState(16);
+
+    const increaseFont = () => {
+        setFontSize((prevSize) => Math.min(48,prevSize + 2));
+      };
+    
+      const decreaseFont = () => {
+        setFontSize((prevSize) => Math.max(10, prevSize - 2));
+      };
+
+
+      
     return (
         <ChakraProvider>
             <div className={"bg-slate-700 w-screen h-screen"}>
                 <div className={"flex flex-col items-center justify-center h-full w-full px-4 py-10"}>
+                    <div className={'flex flex-row space-x-5 mt-5 mb-5'}>
+                    <IconButton
+                        aria-label='Decrease font'
+                        onClick={decreaseFont}
+                        icon={<MinusIcon />}
+                        />
+                    <IconButton
+                        aria-label='Increase font'
+                        onClick={increaseFont}
+                        icon={<AddIcon />}
+                        />
+                    
+                    </div>
                     <div className={'w-full h-full lg:w-2/3 lg:h-2/3 bg-slate-300 rounded-2xl p-2 overflow-auto'}>
-                        <div id={'scrollable'} className={'break-words'}>
+                        <div id={'scrollable'} className={'break-words transition-transform duration-10'}>
                             {words?.map((word, index) => {
-                                return <span key={index} ref={refs[index]} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-white text-2xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
+                                return <span key={index} ref={refs[index]} style={{ fontSize: `${fontSize}px` }} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-white text-2xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
                             })}
                         </div>
                     </div>
