@@ -2,6 +2,7 @@
 import { ChakraProvider, Button } from '@chakra-ui/react'
 import Link from 'next/link'
 import 'regenerator-runtime/runtime'
+import { Lexend } from "next/font/google";
 
 export default function Home() {
   return (
