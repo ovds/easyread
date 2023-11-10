@@ -109,13 +109,16 @@ export default function Page() {
     }, [latestWord, latestWordIndex, scrollToWord, transcript, words]);
 
     const [fontSize, setFontSize] = useState(16);
+    const [lineHeight, setLineHeight] = useState(24);
 
     const increaseFont = () => {
         setFontSize((prevSize) => Math.min(48,prevSize + 2));
+        setLineHeight((prevHeight) => Math.min(72,(((prevHeight/2.0) + 2) * 2.0)));
       };
     
       const decreaseFont = () => {
         setFontSize((prevSize) => Math.max(10, prevSize - 2));
+        setLineHeight((prevHeight) => Math.max(15,(((prevHeight/2.0) - 2) * 2.0)));
       };
 
 
@@ -140,7 +143,7 @@ export default function Page() {
                     <div className={'w-full h-full lg:w-2/3 lg:h-2/3 bg-slate-300 rounded-2xl p-2 overflow-auto'}>
                         <div id={'scrollable'} className={'break-words transition-transform duration-10'}>
                             {words?.map((word, index) => {
-                                return <span key={index} ref={refs[index]} style={{ fontSize: `${fontSize}px` }} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-white text-2xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
+                                return <span key={index} ref={refs[index]} style={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? { fontSize: `${fontSize+6}px`, lineHeight: `${((lineHeight/2.0)+6) * 2.0}px` } : { fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` }} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-white text-2xl bg-slate-800 bg-opacity-60' : 'text-black text-xl'}>{word + " "}</span>
                             })}
                         </div>
                     </div>
