@@ -16,6 +16,7 @@ export default function Page() {
     }
 
     const submit = () => {
+        router.push('/read');
         localStorage.setItem('text', text)
     }
 
