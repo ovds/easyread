@@ -7,8 +7,7 @@ import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition"
 import {Button, ChakraProvider} from "@chakra-ui/react";
 
 export default function Page() {
-    const searchParams = useSearchParams()
-    let words = searchParams.get('text')?.split(' ');
+    let words = localStorage.getItem('text')?.split(" ");
 
     // @ts-ignore
     const refs = words.reduce((acc, val, i) => {
