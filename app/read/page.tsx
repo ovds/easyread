@@ -1,7 +1,6 @@
 'use client'
 
 import 'regenerator-runtime/runtime'
-import { useSearchParams } from "next/navigation";
 import {createRef, RefObject, useEffect, useState} from "react";
 import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 import {Button, ChakraProvider} from "@chakra-ui/react";
