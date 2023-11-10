@@ -10,20 +10,14 @@ export default function Page() {
     const [text, setText] = useState('');
     const router = useRouter();
 
-    const createQueryString = (name:string, value:string) => {
-        const params = new URLSearchParams();
-        params.set(name, value);
-
-        return params.toString();
-    };
-
     const handleInputChange = (e:any) => {
         let inputValue = e.target.value
         setText(inputValue)
     }
 
     const submit = () => {
-        router.push('/read' + "?" + createQueryString("text", text))
+        router.push('/read');
+        localStorage.setItem('text', text)
     }
 
     return (

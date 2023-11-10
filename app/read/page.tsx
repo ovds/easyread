@@ -9,8 +9,7 @@ import { IconButton } from '@chakra-ui/react'
 import {AddIcon, MinusIcon} from "@chakra-ui/icons";
 
 export default function Page() {
-    const searchParams = useSearchParams()
-    let words = searchParams.get('text')?.split(' ');
+    let words = localStorage.getItem('text')?.split(" ");
 
     // @ts-ignore
     const refs = words.reduce((acc, val, i) => {
