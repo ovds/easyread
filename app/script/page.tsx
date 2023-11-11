@@ -20,12 +20,16 @@ export default function Page() {
 
     const submit = () => {
         router.push('/read');
-        localStorage.setItem('text', text)
+        if (typeof window !== undefined) {
+            localStorage.setItem('text', text)
+        }
     }
 
     const submitFile = (text: string) => {
         router.push('/read');
-        localStorage.setItem('text', text)
+        if (typeof window !== undefined) {
+            localStorage.setItem('text', text)
+        }
     }
 
     const [showModal, setShowModal] = useState(false);
