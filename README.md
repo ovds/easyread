@@ -1,6 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Inspiration
+We've all experienced the stress and horror of being forced to speak in front of a large audience - having to remember and read hundreds or thousands of words with perfection. On top of all the pressure that comes with speaking, you also have the additional responsibility to follow along with your script. For those of us who suffer from speech or language disorders, this is frequently a nightmarish situation. We wanted to remove the multitasking from this stressful scenario, to enable those with such learning disabilities to perform their best. 
 
-## Getting Started
+## What it does
+EasyRead is an easily accessible and fast online tool that uses AI Speech Recognition to help you follow along a script automatically. It highlights and scrolls to the words to say next as you speak, making it a hands-free and fully synchronized experience that can even account for errors with our algorithm.
+
+## How we built it
+We used Next.JS 14 and React Speech Recognition to create a smooth and responsive website, hosted on Vercel.  Tailwind and Chakra UI were used to beautify the app.
+
+## Accomplishments that we're proud of
+EasyRead is fully functional and can be accessed from any modern device with a microphone - be it laptop, desktop or mobile, making it perfect for easy use. 
+
+## What's next for EasyRead
+An upgraded speech recognition model, and a database for persistent storage of multiple scripts based on user accounts. 
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`]
+
+## Trying it out
+Try out EasyRead [here](https://easyreading.vercel.app/)
+
+## Getting Started On Localhost
 
 First, run the development server:
 
