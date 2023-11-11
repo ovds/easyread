@@ -4,10 +4,10 @@ import {Button, Center, ChakraProvider, IconButton, Textarea} from "@chakra-ui/r
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import { CookiesProvider } from 'react-cookie';
+import { setCookie } from 'cookies-next';
 import Dropzone from "../components/dropzone";
 import 'regenerator-runtime/runtime'
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
-
 
 export default function Page() {
     const [text, setText] = useState('');
@@ -19,20 +19,12 @@ export default function Page() {
     }
 
     const submit = () => {
-        try {
-            localStorage.setItem('text', text)
-        } catch (e) {
-            console.error(e)
-        }
+        setCookie('text', text);
         router.push('/read');
     }
 
     const submitFile = (text: string) => {
-        try {
-            localStorage.setItem('text', text)
-        } catch (e) {
-            console.error(e)
-        }
+        setCookie('text', text);
         router.push('/read');
     }
 

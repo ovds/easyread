@@ -6,16 +6,13 @@ import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition"
 import {Button, ChakraProvider} from "@chakra-ui/react";
 import { IconButton } from '@chakra-ui/react'
 import {AddIcon, MinusIcon} from "@chakra-ui/icons";
+import { getCookie } from "cookies-next";
+
 
 export default function Page() {
-    const [words, setWords] = useState<string[]>([]);
+    // @ts-ignore
+    const words: string[] = getCookie('text').split(" ");
 
-    useEffect(() => {
-        if (typeof window !== undefined) {
-            const text = localStorage.getItem('text') || "";
-            setWords(text.split(" "));
-        }
-    }, []);
 
     // @ts-ignore
     const refs = words.reduce((acc, val, i) => {
