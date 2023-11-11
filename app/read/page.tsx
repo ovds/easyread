@@ -1,14 +1,16 @@
 'use client'
 
 import 'regenerator-runtime/runtime'
-import {createRef, RefObject, useEffect, useState} from "react";
+import {createRef, RefObject, useEffect, useMemo, useState} from "react";
 import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 import {Button, ChakraProvider} from "@chakra-ui/react";
 import { IconButton } from '@chakra-ui/react'
 import {AddIcon, MinusIcon} from "@chakra-ui/icons";
+import {useSearchParams} from "next/navigation";
 
 export default function Page() {
-    let words = localStorage.getItem('text')?.split(" ");
+    const searchParams = useSearchParams()
+    const words = searchParams.get('text')?.split(' ') || [];
 
     // @ts-ignore
     const refs = words.reduce((acc, val, i) => {
@@ -62,7 +64,7 @@ export default function Page() {
             end = words.length;
         }
 
-        if (words) {
+        if (words.length > 0 && words) {
             for (let i = latestWordIndex; i < end - 5; i++) {
                 // @ts-ignore
                 if (words[i].includes(latestWord.replace(/[^a-zA-Z0-9]/g, ""))) {
