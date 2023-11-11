@@ -19,17 +19,21 @@ export default function Page() {
     }
 
     const submit = () => {
-        router.push('/read');
-        if (typeof window !== undefined) {
+        try {
             localStorage.setItem('text', text)
+        } catch (e) {
+            console.error(e)
         }
+        router.push('/read');
     }
 
     const submitFile = (text: string) => {
-        router.push('/read');
-        if (typeof window !== undefined) {
+        try {
             localStorage.setItem('text', text)
+        } catch (e) {
+            console.error(e)
         }
+        router.push('/read');
     }
 
     const [showModal, setShowModal] = useState(false);

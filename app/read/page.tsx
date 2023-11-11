@@ -8,7 +8,14 @@ import { IconButton } from '@chakra-ui/react'
 import {AddIcon, MinusIcon} from "@chakra-ui/icons";
 
 export default function Page() {
-    let words = typeof window !== undefined ? localStorage.getItem('text')?.split(" ") : [];
+    const [words, setWords] = useState<string[]>([]);
+
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            const text = localStorage.getItem('text') || "";
+            setWords(text.split(" "));
+        }
+    }, []);
 
     // @ts-ignore
     const refs = words.reduce((acc, val, i) => {
