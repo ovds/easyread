@@ -105,7 +105,11 @@ export default function Page() {
         setLineHeight((prevHeight) => Math.max(15,(((prevHeight/2.0) - 2) * 2.0)));
       };
 
-
+    const reset = () => {
+        resetTranscript();
+        setLatestWord("");
+        setLatestWordIndex(0);
+    }
       
     return (
         <ChakraProvider>
@@ -133,7 +137,7 @@ export default function Page() {
                     </div>
                     <div className={'flex flex-row space-x-10 mt-5'}>
                         <Button onClick={listenContinuously}>Start</Button>
-                        <Button colorScheme={'red'} onClick={resetTranscript}>Reset</Button>
+                        <Button colorScheme={'red'} onClick={reset}>Reset</Button>
                     </div>
                 </div>
             </div>
