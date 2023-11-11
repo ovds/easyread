@@ -19,7 +19,7 @@ export default function Page() {
     const scrollToWord = (index: number) => {
         refs[index].current?.scrollIntoView({
             behavior: 'smooth',
-            block: 'start',
+            block: 'center',
         });
     };
 
