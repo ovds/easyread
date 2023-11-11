@@ -133,7 +133,7 @@ export default function Page() {
                     <div className={'w-full h-full lg:w-2/3 lg:h-2/3 bg-slate-300 rounded-2xl p-2 overflow-auto'}>
                         <div id={'scrollable'} className={'break-words transition-transform duration-10'}>
                             {words?.map((word, index) => {
-                                return <span key={index} ref={refs[index]} style={{ fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` }} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-white text-2xl font-bold' : 'text-black text-xl'}>{word + " "}</span>
+                                return <span key={index} ref={refs[index]} style={{ fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` }} className={(((latestWordIndex + 1) == index && latestWordIndex != 0) || (latestWordIndex == 0 && index == 0)) ? 'text-black text-2xl font-semibold' : 'text-gray-500 text-xl'}>{word + " "}</span>
                             })}
                         </div>
                     </div>
